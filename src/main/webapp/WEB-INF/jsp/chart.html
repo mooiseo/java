@@ -1,0 +1,102 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>google chart API</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+
+function ajaxData() {
+	$.ajax({
+		url: './hrs/emp/findChart.do',
+		type: 'post',
+		dataType: 'Json',
+		async: false,
+		success: function(lists) {
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+			function drawChart() {
+				var dataChart = [['Gender', 'Total', { role: 'style' }]];
+				if(lists.length != 0) {
+					$.each(lists, function(i, item){//$.each(arr,function(index++,arr's obj1..){})
+						if(item.item=='Woman'){
+							dataChart.push([item.item, item.number,'color:red']);
+							}else{
+							dataChart.push([item.item, item.number,'#0054FF']);	
+							}
+						});
+				}
+				console.log(dataChart);
+				var data = google.visualization.arrayToDataTable(dataChart);
+				var view = new google.visualization.DataView(data);
+				var options = {
+						title: "직장 남녀 비율",
+						titleTextStyle:{fontSize:30,color: 'green'},
+						width: 900, // 넓이 옵션
+						height: 300 // 높이 옵션
+				};
+				var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+				chart.draw(data, options);
+			}
+		}
+	});
+}
+
+function ajaxData1() {
+
+	
+	$.ajax({
+		url: './hrs/emp/findChart.do',
+		type: 'post',
+		dataType: 'Json',
+		async: false,
+		success: function(lists) {
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+			function drawChart() {
+				var dataChart = [['Gender', 'Total', { role: 'style' }]];
+				if(lists.length != 0) {
+					$.each(lists, function(i, item){//$.each(arr,function(index++,arr's obj1..){})
+					if(item.item=='Woman'){
+						dataChart.push([item.item, item.number,'color:red']);
+						}else{
+						dataChart.push([item.item, item.number,'#0054FF']);	
+						}
+					});
+				}
+				
+				var data = google.visualization.arrayToDataTable(dataChart);//1.특정형식으로 만든 데이터를 테이블에 넣은후 data를만듬
+				var view = new google.visualization.DataView(data);
+				view.setColumns([0, 1,
+                    { calc: "stringify",
+                      sourceColumn: 1,
+                      type: "string",
+                      role: "annotation" },
+                    2]);
+				var options = {
+				        title: "직장 남녀 비율",
+				        titleTextStyle:{fontSize:30,color: 'green'},
+				        width: 600,
+				        height: 400,
+				        bar: {groupWidth: "95%"},
+				        legend: { position: "none" }
+				      };
+				
+				var chart = new google.visualization.BarChart(document.getElementById("piechart"));
+			      chart.draw(view, options);
+			}
+		}
+	});
+}
+$(document).ready(function(){
+	ajaxData();
+});
+</script>
+</head>
+<body>
+	<div id="piechart"></div>
+	<input type="button" value="PIE형태" onclick="ajaxData()"/>
+	<input type="button" value="Chart형태" onclick="ajaxData1()"/>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting value="true" name="callSettersOnNulls" />
+		<setting value="false" name="cacheEnabled" />
+		<setting value="true" name="useGeneratedKeys" />
+		<setting value="REUSE" name="defaultExecutorType" />
+		<setting value="VARCHAR" name="jdbcTypeForNull" />
+		<setting value="true" name="mapUnderscoreToCamelCase" />
+	</settings>
+
+<!-- 
+	<typeAliases>
+
+		시스템공통
+		<package name="com.bank.his.common.to" />
+		<package name="com.bank.his.common.util" />
+		<package name="com.bank.his.com.system.to" />
+		 인사
+		<package name="com.bank.his.hrs.emp.to" />               인사관리
+		고객
+		<package name="com.bank.his.com.cus.to" />
+		여신
+		<package name="com.bank.his.loan.loanAppMgt.to" />		
+		수신
+		<package name="com.bank.his.saving.chequePublicMgt.to" />
+		<package name="com.bank.his.saving.depo.to" />
+		<package name="com.bank.his.saving.accdt.vo" />				제사고신고
+		<package name="com.bank.his.saving.cancel.to" />
+		상품
+		<package name="com.bank.his.saving.product.to" />
+		타행계좌
+		<package name="com.bank.his.otherBank.to" />
+		
+		
+		
+   </typeAliases> -->
+
+</configuration>

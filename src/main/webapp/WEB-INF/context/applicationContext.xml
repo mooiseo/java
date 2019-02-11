@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+  <context:component-scan base-package="kr.co.samsung">
+        <context:exclude-filter type="aspectj" expression="kr.co.samsung..controller.*" />
+    </context:component-scan>
+
+    <bean id="message"
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+               <value>message/comMessage</value>
+               <value>message/accMessage</value>
+               <value>message/supMessage</value>
+               <value>message/wonMessage</value>
+               <value>message/medMessage</value>
+               <value>message/hrsMessage</value>
+               <value>message/loanMessage</value>
+               <value>message/drug</value>
+               <value>message/path</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="fallbackToSystemLocale" value="true"/>
+    </bean>
+<!--
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>message.exception</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="fallbackToSystemLocale" value="false"/>
+    </bean>
+-->
+
+</beans>

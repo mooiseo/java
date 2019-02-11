@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 
+    Weblogic Datasource Setting
+    <bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+        <property name="environment">
+            <props>
+                <prop key="java.naming.provider.url">t3://localhost:7001</prop>
+                <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="dataSourceSpied" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName">
+            <value>oraDs</value>
+        </property> 
+        <property name="jndiTemplate">
+            <ref local="jndiTemplate"/>
+        </property>
+    </bean> 
+
+    Query Log print
+    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSourceSpied" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL       : " />
+            </bean>
+        </property>
+    </bean>
+-->
+    <bean id="propertyConfigurer" 
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" 
+        p:location="/WEB-INF/config/jdbc.properties" />
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxTotal" value="${jdbc.maxTotal}"/>
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <property name="maxWaitMillis" value="${jdbc.maxWaitMillis}"/>
+    </bean>
+    
+ 
+
+</beans>
